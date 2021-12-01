@@ -1,6 +1,5 @@
 from bottle import route, run, request, static_file
 from json import dumps
-import tempfile
 
 from conversion import *
 
