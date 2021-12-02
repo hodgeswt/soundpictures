@@ -4,8 +4,6 @@ import os
 
 from conversion import *
 
-PORT = os.environ.get("PORT")
-
 @route('/upload', method='GET')
 def upload_form():
     # An HTML form to upload a file
@@ -32,4 +30,4 @@ def sound_picture():
 def png(filepath):
     return static_file(filepath, root="./")
 
-run(host='localhost', port=PORT, debug=True)
+run(host='localhost', port=int(os.environ.get("PORT", 5000)))
