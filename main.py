@@ -4,7 +4,7 @@ import os
 
 from conversion import *
 
-PORT = os.environ.get('ON_HEROKU')
+PORT = os.environ.get("PORT")
 
 @route('/upload', method='GET')
 def upload_form():
