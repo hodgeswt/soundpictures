@@ -1,7 +1,10 @@
 from bottle import route, run, request, static_file
 from json import dumps
+import os
 
 from conversion import *
+
+PORT = os.environ.get('ON_HEROKU')
 
 @route('/upload', method='GET')
 def upload_form():
@@ -29,4 +32,4 @@ def sound_picture():
 def png(filepath):
     return static_file(filepath, root="./")
 
-run(host='localhost', port=8080, debug=True)
+run(host='localhost', port=PORT, debug=True)
