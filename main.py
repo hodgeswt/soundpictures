@@ -1,6 +1,7 @@
 from bottle import route, run, request, static_file
 from json import dumps
 import os
+import base64 
 
 from conversion import *
 
@@ -24,7 +25,20 @@ def sound_picture():
     avg.save("./avg.png")
     new.save("./new.png")
 
-    return static_file("index.html", root="./")
+    resp = {}
+
+    with open('./orig.png', 'rb') as img:
+        resp['orig'] = base64.b64encode(img.read()).decode('utf-8')
+
+    with open('./avg.png', 'rb') as img:
+        resp['avg'] = base64.b64encode(img.read()).decode('utf-8')
+    
+    with open('./new.png', 'rb') as img:
+        resp['new'] = base64.b64encode(img.read()).decode('utf-8')
+    
+    return dumps(resp)
+
+
 
 @route('/<filepath:re:.*\.png>')
 def png(filepath):
